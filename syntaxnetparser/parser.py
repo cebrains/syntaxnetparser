@@ -26,9 +26,9 @@ POS_PARAM = '128-0.08-400-0.9-0'
 PARSER_PARAM = '512x512-0.02-100-0.9-0'
 
 
-parser = TextParser(MODEL_DIR, POS_PARAM, PARSER_PARAM, '256,256', '512,512')
 
 if __name__=="__main__":
+    parser = TextParser(sys.argv[1], POS_PARAM, PARSER_PARAM, '256,256', '512,512')
     text = u'左上肺舌段、左下肺炎症并含气不全较前改善。'
     text_list = []
     for i in range(0, 1000):
