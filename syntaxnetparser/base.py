@@ -20,12 +20,11 @@ def CreatePythonPathEntries(python_imports, module_space):
 
 def FindModuleSpace():
     # Follow symlinks, looking for my module space
-    stub_filename = join(work_dir, 'textparser')
     linux_version = platform.linux_distribution()
     if linux_version[0].lower() == 'ubuntu' and linux_version[1].startswith('14'):
-        return join(work_dir, 'textparser.runfiles.ubuntu14')
+        return join(work_dir, 'runfiles.ubuntu14')
     elif linux_version[0].lower() == 'ubuntu' and linux_version[1].startswith('16'):
-        return join(work_dir, 'textparser.runfiles.ubuntu16')
+        return join(work_dir, 'runfiles.ubuntu16')
     else:
         raise ValueError('unsupported linux version, %s' % str(linux_version))
 
