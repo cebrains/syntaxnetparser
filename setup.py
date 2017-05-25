@@ -37,7 +37,7 @@ buildTime   = """%s"""
     setup(
         name = "syntaxnetparser",
         version = tag,
-        author = "sunjun",
+        author = "qiupengfei",
         author_email = "qiupengfei@rxthinking.com",
         url = "https://github.com/penfree/syntaxnetparser",
         packages = find_packages(),
@@ -45,7 +45,7 @@ buildTime   = """%s"""
         package_data = { "": "*" },
         install_requires = requirements,
         description = "Syntaxnet model predict",
-        long_description = open("README.md").read(),
+        long_description = open("README.md").read()
     )
 finally:
     # Remove generated files

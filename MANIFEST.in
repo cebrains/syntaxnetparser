@@ -1,3 +1,4 @@
 include README.md
 include requirements.txt
-recursive-include syntaxnetparser/data/ *
+recursive-include syntaxnetparser/runfiles.ubuntu14 *
+recursive-include syntaxnetparser/runfiles.ubuntu16 *
