@@ -219,6 +219,7 @@ class TextParser(object):
         )
 
     def parse(self, text_list):
+        text_list = text_list if isinstance(text_list, list) else [text_list]
         predict_input = []
         for text in text_list:
             if not isinstance(text, unicode):
