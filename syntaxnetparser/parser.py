@@ -30,13 +30,18 @@ PARSER_PARAM = '512x512-0.02-100-0.9-0'
 if __name__=="__main__":
     parser = TextParser(sys.argv[1], POS_PARAM, PARSER_PARAM, '256,256', '512,512')
     text = u'左上肺舌段、左下肺炎症并含气不全较前改善。'
+    text1 = u'左上肺舌段、左下肺炎症,1,2,3,4,6,7,8,9,10,11'
     text_list = []
-    for i in range(0, 1000):
-        text_list.append(text)
     start_time = time.time()
-    parse_result = parser.parse(text_list)
-    with open('test.out', 'w') as df:
+    for i in range(0, 100):
+        if i % 2 == 0:
+            input = [text] * 4
+        else:
+            input = [text1] * 6
+
+        parse_result = parser.parse(input)
         for item in parse_result:
-            print >>df, item
+            print item
+        print '----------------------'
     end_time = time.time()
     print end_time-start_time

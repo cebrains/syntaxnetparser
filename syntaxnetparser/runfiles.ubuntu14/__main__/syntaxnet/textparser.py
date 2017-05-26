@@ -128,6 +128,10 @@ class TextParserEval(object):
             self.parser.AddSaver(self.use_slim_model)
             self.sess.run(self.parser.inits.values())
             self.parser.saver.restore(self.sess, os.path.join(self.model_dir, model_path))
+            self.parser.AddEvaluation(self.task_context,
+                                    self.batch_size,
+                                    corpus_name=self.in_corpus_name,
+                                    evaluation_max_steps=self.max_steps)
 
     def RewriteContext(self, task_context, in_corpus_name):
         context = task_spec_pb2.TaskSpec()
@@ -151,20 +155,8 @@ class TextParserEval(object):
         # os.remove(self.in_name)
         # os.remove(self.out_name)
 
-    def Parse(self, sentence):
+    def _parse(self):
         with self.graph.as_default():
-            with open(self.in_name, "w") as f:
-                if isinstance(sentence, list):
-                    for sen in sentence:
-                        print >>f, sen
-                else:
-                    f.write(sentence)
-
-            self.parser.AddEvaluation(self.task_context,
-                                    self.batch_size,
-                                    corpus_name=self.in_corpus_name,
-                                    evaluation_max_steps=self.max_steps)
-            # tf_documents = self.sess.run([self.parser.evaluation['documents'],])
             num_epochs = None
             num_docs = 0
             result = []
@@ -186,6 +178,21 @@ class TextParserEval(object):
                 elif num_epochs < tf_epochs:
                     break
             return result
+
+    def Parse(self, sentence):
+        with self.graph.as_default():
+            with open(self.in_name, 'w') as f:
+                pass
+            self._parse()
+
+            with open(self.in_name, "w") as f:
+                if isinstance(sentence, list):
+                    for sen in sentence:
+                        print >>f, sen
+                else:
+                    f.write(sentence)
+            return self._parse()
+
 
 class TextParser(object):
     '''
